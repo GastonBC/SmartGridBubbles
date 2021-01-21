@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Smart Grid Bubbles</Name>
+    <Assembly>SmartGridBubbles.dll</Assembly>
+    <AddInId>A0C20AC6-2839-4F3F-BA16-B50605359F4C</AddInId>
+    <FullClassName>SmartGridBubbles.ThisApplication</FullClassName>
+    <VendorId>Gast</VendorId>
+    <VendorDescription>gastonbalparda@gmail.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
