@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SmartGridBubbles
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    [Autodesk.Revit.DB.Macros.AddInId("A0C20AC6-2839-4F3F-BA16-B50605359F4C")]
+    [Autodesk.Revit.DB.Macros.AddInId(GlobalVars.CMD_GUID)]
     class ThisCommand : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)

@@ -11,7 +11,7 @@ using System.Reflection;
 namespace SmartGridBubbles
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    [Autodesk.Revit.DB.Macros.AddInId("A0C20AC6-2839-4F3F-BA16-B50605359F4C")]
+    [Autodesk.Revit.DB.Macros.AddInId(GlobalVars.APP_GUID)]
     public class ThisApplication : IExternalApplication
     {
         public Result OnShutdown(UIControlledApplication application)
@@ -21,6 +21,12 @@ namespace SmartGridBubbles
 
         public Result OnStartup(UIControlledApplication uiApp)
         {
+            #region GAS ADDIN BOILERPLATE
+
+            // Finds and creates the tab, finds and creates the panel
+
+
+
             string ThisDllPath = Assembly.GetExecutingAssembly().Location;
             Assembly ThisAssembly = Assembly.GetExecutingAssembly();
 
@@ -29,18 +35,28 @@ namespace SmartGridBubbles
 
             RibbonPanel DefaultPanel = null;
 
-            // Try creating the panel in Pyrevit Tab
+            // First try to create the tab
             try
             {
-                DefaultPanel = uiApp.CreateRibbonPanel("Gas Tools", "Quick Tools");
+                uiApp.CreateRibbonTab(GlobalVars.TAB_NAME);
             }
-
-            // Tab doesn't exist, create it
             catch (Autodesk.Revit.Exceptions.ArgumentException)
             {
-                uiApp.CreateRibbonTab("Gas Tools");
-                DefaultPanel = uiApp.CreateRibbonPanel("Gas Tools", "Quick Tools");
+                // Tab is already created
             }
+
+
+            // Then create the panel
+            try
+            {
+                DefaultPanel = uiApp.CreateRibbonPanel(GlobalVars.TAB_NAME, GlobalVars.PANEL_NAME);
+            }
+
+            catch (Autodesk.Revit.Exceptions.ArgumentException)
+            {
+                DefaultPanel = uiApp.GetRibbonPanels(GlobalVars.TAB_NAME).FirstOrDefault(n => n.Name.Equals(GlobalVars.PANEL_NAME, StringComparison.InvariantCulture));
+            }
+            #endregion
 
             try
             {
