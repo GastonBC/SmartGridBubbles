@@ -35,26 +35,16 @@ namespace SmartGridBubbles
 
             RibbonPanel DefaultPanel = null;
 
-            // First try to create the tab
+
+            // Create the panel in the addins tab
             try
             {
-                uiApp.CreateRibbonTab(GlobalVars.TAB_NAME);
-            }
-            catch (Autodesk.Revit.Exceptions.ArgumentException)
-            {
-                // Tab is already created
-            }
-
-
-            // Then create the panel
-            try
-            {
-                DefaultPanel = uiApp.CreateRibbonPanel(GlobalVars.TAB_NAME, GlobalVars.PANEL_NAME);
+                DefaultPanel = uiApp.CreateRibbonPanel(GlobalVars.PANEL_NAME);
             }
 
             catch (Autodesk.Revit.Exceptions.ArgumentException)
             {
-                DefaultPanel = uiApp.GetRibbonPanels(GlobalVars.TAB_NAME).FirstOrDefault(n => n.Name.Equals(GlobalVars.PANEL_NAME, StringComparison.InvariantCulture));
+                DefaultPanel = uiApp.GetRibbonPanels().FirstOrDefault(n => n.Name.Equals(GlobalVars.PANEL_NAME, StringComparison.InvariantCulture));
             }
             #endregion
 
